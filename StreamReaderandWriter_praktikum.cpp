@@ -210,3 +210,22 @@ void simulasiEtalase() {
     cout << "Simulasi selesai. Program tetap berjalan dengan aman.\n";
     cout << string(60, '*') << "\n";
 }
+
+void tampilkanHeader() {
+    cout << "\n";
+    cout << "  ==================================================\n";
+    cout << "      SISTEM MANAJEMEN TOKO ELEKTRONIK GIBRAN JAYA  \n";
+    cout << "  ==================================================\n\n";
+}
+
+void tampilkanMenu() {
+    cout << "\n--------- MENU UTAMA ---------\n";
+    cout << " 1. Lihat Daftar Barang \n";
+    cout << " 2. Tambah Barang Baru  \n";
+    cout << " 3. Perbarui Data Barang \n";
+    cout << " 4. Hapus Data Barang   \n";
+    cout << " 5. Simulasi Etalase   \n";
+    cout << " 0. Keluar\n";
+    cout << "------------------------------\n";
+    cout << " Pilihan Anda: ";
+}
