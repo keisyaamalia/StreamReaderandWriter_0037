@@ -129,3 +129,35 @@ void tambahBarang() {
     cout << "\n[OK] Barang \"" << b.nama << "\" (ID: " << b.id
          << ") berhasil ditambahkan ke gudang.\n";
 }
+
+void updateBarang() {
+    vector<Barang> daftar = bacaGudang();
+    tampilkanDaftar(daftar);
+    if (daftar.empty()) { cout << "Tidak ada data untuk diubah.\n"; return; }
+    int targetId;
+    cout << "Masukkan ID barang yang akan diperbarui: "; cin >> targetId;
+    auto it = find_if(daftar.begin(), daftar.end(),
+                      [&](const Barang& b){ return b.id == targetId; });
+    if (it == daftar.end()) {
+        cout << "[ERROR] Barang dengan ID " << targetId << " tidak ditemukan.\n";
+        return;
+    }
+    cout << "\nData saat ini:\n";
+    cout << "  Nama     : " << it->nama     << "\n";
+    cout << "  Kategori : " << it->kategori << "\n";
+    cout << "  Stok     : " << it->stok     << "\n";
+    cout << "  Harga    : Rp " << fixed << setprecision(0) << it->harga << "\n";
+    clearInput();
+    cout << "\nMasukkan data baru (kosongkan Enter = tidak berubah):\n";
+    string tmp;
+    cout << "Nama Barang  [" << it->nama     << "]: ";
+    getline(cin, tmp); if (!tmp.empty()) it->nama = tmp;
+    cout << "Kategori     [" << it->kategori << "]: ";
+    getline(cin, tmp); if (!tmp.empty()) it->kategori = tmp;
+    cout << "Stok         [" << it->stok     << "]: ";
+    getline(cin, tmp); if (!tmp.empty()) it->stok = stoi(tmp);
+    cout << "Harga (Rp)   [" << fixed << setprecision(0) << it->harga << "]: ";
+    getline(cin, tmp); if (!tmp.empty()) it->harga = stod(tmp);
+    simpanGudang(daftar);
+    cout << "\n[OK] Data barang ID " << targetId << " berhasil diperbarui.\n";
+}
