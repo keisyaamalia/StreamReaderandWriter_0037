@@ -41,3 +41,51 @@ public:
         }
     }
 };
+
+Barang parseBaris(const string& baris) {
+    Barang b;
+    stringstream ss(baris);
+    string token;
+    getline(ss, token, '|'); b.id       = stoi(token);
+    getline(ss, token, '|'); b.nama     = token;
+    getline(ss, token, '|'); b.kategori = token;
+    getline(ss, token, '|'); b.stok     = stoi(token);
+    getline(ss, token, '|'); b.harga    = stod(token);
+    return b;
+}
+
+string toBaris(const Barang& b) {
+    return to_string(b.id) + "|" + b.nama + "|" + b.kategori + "|" +
+           to_string(b.stok) + "|" + to_string(b.harga);
+}
+
+vector<Barang> bacaGudang() {
+    vector<Barang> daftar;
+    ifstream fin(FILE_GUDANG);
+    if (!fin.is_open()) return daftar;
+    string baris;
+    while (getline(fin, baris)) {
+        if (!baris.empty()) {
+            try { daftar.push_back(parseBaris(baris)); }
+            catch (...) {}
+        }
+    }
+    fin.close();
+    return daftar;
+}
+
+void simpanGudang(const vector<Barang>& daftar) {
+    ofstream fout(FILE_GUDANG, ios::trunc);
+    for (const auto& b : daftar) fout << toBaris(b) << "\n";
+    fout.close();
+}
+
+int idTerbesar(const vector<Barang>& daftar) {
+    int maks = 0;
+    for (const auto& b : daftar) if (b.id > maks) maks = b.id;
+    return maks;
+}
+
+void clearInput() {
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+}
