@@ -161,3 +161,27 @@ void updateBarang() {
     simpanGudang(daftar);
     cout << "\n[OK] Data barang ID " << targetId << " berhasil diperbarui.\n";
 }
+
+void hapusBarang() {
+    vector<Barang> daftar = bacaGudang();
+    tampilkanDaftar(daftar);
+    if (daftar.empty()) { cout << "Tidak ada data untuk dihapus.\n"; return; }
+    int targetId;
+    cout << "Masukkan ID barang yang akan dihapus: "; cin >> targetId;
+    auto it = find_if(daftar.begin(), daftar.end(),
+                      [&](const Barang& b){ return b.id == targetId; });
+    if (it == daftar.end()) {
+        cout << "[ERROR] Barang dengan ID " << targetId << " tidak ditemukan.\n";
+        return;
+    }
+    cout << "Konfirmasi hapus \"" << it->nama << "\"? (y/n): ";
+    char konfirm; clearInput(); cin >> konfirm;
+    if (tolower(konfirm) == 'y') {
+        string namaHapus = it->nama;
+        daftar.erase(it);
+        simpanGudang(daftar);
+        cout << "[OK] Barang \"" << namaHapus << "\" berhasil dihapus dari gudang.\n";
+    } else {
+        cout << "Penghapusan dibatalkan.\n";
+    }
+}
