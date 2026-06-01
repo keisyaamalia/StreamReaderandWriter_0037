@@ -185,3 +185,28 @@ void hapusBarang() {
         cout << "Penghapusan dibatalkan.\n";
     }
 }
+
+void simulasiEtalase() {
+    TokoElektronik toko;
+    cout << "\n" << string(60, '*') << "\n";
+    cout << "      SIMULASI ETALASE - TOKO ELEKTRONIK GIBRAN JAYA\n";
+    cout << string(60, '*') << "\n";
+
+    cout << "\n[Skenario 1] Mengambil produk di RAK INDEKS 1 ...\n";
+    try {
+        string produk = toko.ambilProduk(1);
+        cout << "[SUKSES] Produk ditemukan  : " << produk << "\n";
+    }
+    catch (const string& err) { cout << "[ERROR] " << err << "\n"; }
+
+    cout << "\n[Skenario 2] Mengambil produk di RAK INDEKS 5 ...\n";
+    try {
+        string produk = toko.ambilProduk(5);
+        cout << "[SUKSES] Produk ditemukan  : " << produk << "\n";
+    }
+    catch (const string& err) { cout << "[ERROR] " << err << "\n"; }
+
+    cout << "\n" << string(60, '*') << "\n";
+    cout << "Simulasi selesai. Program tetap berjalan dengan aman.\n";
+    cout << string(60, '*') << "\n";
+}
