@@ -89,3 +89,27 @@ int idTerbesar(const vector<Barang>& daftar) {
 void clearInput() {
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
 }
+
+void tampilkanDaftar(const vector<Barang>& daftar) {
+    cout << "\n" << string(74, '=') << "\n";
+    cout << left << setw(5) << "ID" << setw(25) << "Nama Barang"
+         << setw(15) << "Kategori" << setw(7) << "Stok" << "Harga\n";
+    cout << string(74, '-') << "\n";
+    if (daftar.empty()) {
+        cout << "  (Gudang kosong)\n";
+    } else {
+        for (const auto& b : daftar) {
+            cout << left << setw(5) << b.id << setw(25) << b.nama
+                 << setw(15) << b.kategori << setw(7) << b.stok
+                 << "Rp " << fixed << setprecision(0) << b.harga << "\n";
+        }
+    }
+    cout << string(74, '=') << "\n";
+}
+
+void lihatBarang() {
+    cout << "\n===== DAFTAR BARANG GUDANG =====";
+    vector<Barang> daftar = bacaGudang();
+    tampilkanDaftar(daftar);
+    cout << "Total: " << daftar.size() << " barang.\n";
+}
