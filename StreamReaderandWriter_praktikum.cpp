@@ -229,3 +229,30 @@ void tampilkanMenu() {
     cout << "------------------------------\n";
     cout << " Pilihan Anda: ";
 }
+
+int main() {
+    tampilkanHeader();
+    int pilihan;
+    do {
+        lihatBarang();
+        tampilkanMenu();
+        if (!(cin >> pilihan)) {
+            cin.clear();
+            clearInput();
+            pilihan = -1;
+        }
+        switch (pilihan) {
+            case 1: lihatBarang();      break;
+            case 2: tambahBarang();     break;
+            case 3: updateBarang();     break;
+            case 4: hapusBarang();      break;
+            case 5: simulasiEtalase();  break;
+            case 0:
+                cout << "\nTerima kasih telah menggunakan Sistem Gibran Jaya. Sampai jumpa!\n\n";
+                break;
+            default:
+                cout << "\n[!] Pilihan tidak valid. Silakan coba lagi.\n";
+        }
+    } while (pilihan != 0);
+    return 0;
+}
