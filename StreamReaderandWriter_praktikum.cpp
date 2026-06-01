@@ -113,3 +113,19 @@ void lihatBarang() {
     tampilkanDaftar(daftar);
     cout << "Total: " << daftar.size() << " barang.\n";
 }
+
+void tambahBarang() {
+    cout << "\n===== TAMBAH BARANG BARU =====\n";
+    vector<Barang> daftar = bacaGudang();
+    Barang b;
+    b.id = idTerbesar(daftar) + 1;
+    clearInput();
+    cout << "Nama Barang  : "; getline(cin, b.nama);
+    cout << "Kategori     : "; getline(cin, b.kategori);
+    cout << "Stok         : "; cin >> b.stok;
+    cout << "Harga (Rp)   : "; cin >> b.harga;
+    daftar.push_back(b);
+    simpanGudang(daftar);
+    cout << "\n[OK] Barang \"" << b.nama << "\" (ID: " << b.id
+         << ") berhasil ditambahkan ke gudang.\n";
+}
